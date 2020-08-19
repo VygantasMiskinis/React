@@ -54,24 +54,29 @@ class CommentForm extends Component {
     constructor(props){
         super(props);
         this.state = {
-            isModalOpen: true
+            isModalOpen: false
             
         };
         this.toggleModal = this.toggleModal.bind(this);
     }
     
+        handleSubmit(values){
+            this.toggleModal();
+            console.log("current State is " + JSON.stringify(values));
+            alert("current State is " + JSON.stringify(values));
+        }
         toggleModal(){
             this.setState({
                 isModalOpen: !this.state.isModalOpen
-            
+                
             })
         }
   
     render(){
         return(
-            <div className="container">
+            <div>
             <Button outline onClick={this.toggleModal}>
-                <span className="fa fa-sign-in fa-lg"></span>Submit Comment
+                <span className="fa fa-pencil fa-lg"></span>Submit Comment
             </Button>
               <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
               <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
@@ -126,7 +131,7 @@ class CommentForm extends Component {
                             </Row>
                             <Row className="form-group">
                                 <Col md={{size:10}}>
-                                    <Button type="submit" color="primary">
+                                    <Button type="submit" value="submit" color="primary">
                                     Submit
                                     </Button>
                                 </Col>
