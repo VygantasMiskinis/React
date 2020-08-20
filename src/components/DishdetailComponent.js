@@ -21,7 +21,7 @@ const minLength = (len) => (val) => (val) && (val.length >= len);
         );
 }
 
-function RenderComments({comments, addComment, dishId}){
+function RenderComments({comments, postComment, dishId}){
 
     const commentList = comments.map((comment) => {
        
@@ -43,7 +43,7 @@ function RenderComments({comments, addComment, dishId}){
             <ul>
                 <h4>Comments</h4>
                 {commentList}
-                <CommentForm dishId={dishId} addComment={addComment}/>
+                <CommentForm dishId={dishId} postComment={postComment}/>
             </ul>
         </div>
         
@@ -64,7 +64,7 @@ class CommentForm extends Component {
     
         handleSubmit(values){
             this.toggleModal();
-            this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+            this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
         }
         toggleModal(){
             this.setState({
@@ -99,8 +99,8 @@ class CommentForm extends Component {
                                 </Row>            
                                 <Row className="form-group">
                                 <Col>
-                                    <Label htmlFor="name">First Name</Label>
-                                    <Control.text model=".name" id="name" name="name"
+                                    <Label htmlFor="author">First Name</Label>
+                                    <Control.text model=".author" id="author" name="author"
                                         placeholder="First Name"
                                         className="form-control"
                                         validators={{
@@ -109,7 +109,7 @@ class CommentForm extends Component {
                                             />
                                     <Errors
                                         className="text-danger"
-                                        model=".name"
+                                        model=".author"
                                         show="touched"
                                         messages={{
                                             required: 'Required',
@@ -180,7 +180,7 @@ class CommentForm extends Component {
                     </div>
                     <div className="row">
                         <div className="col-12 col-md-5 m-1"><RenderDish dish={props.dish} /></div>
-                        <div className="col-12 col-md-5 m-1"><RenderComments comments ={props.comments} addComment={props.addComment} dishId={props.dish.id}/></div>
+                        <div className="col-12 col-md-5 m-1"><RenderComments comments ={props.comments} postComment={props.postComment} dishId={props.dish.id}/></div>
                     </div>
             </div>
             );
